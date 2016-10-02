@@ -11,17 +11,24 @@
 
   <repositories>
     <repository>
-      <id>javacord-repo</id>
-      <url>http://repo.bastian-oppermann.de</url>
+      <id>jcenter</id>
+      <url>http://jcenter.bintray.com</url>
+    </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
     </repository>
   </repositories>
 
   <dependencies>
+    <!-- Parrot is a abstraction layer for properties files -->
     <dependency>
-      <groupId>org.javalite</groupId>
-      <artifactId>javalite-common</artifactId>
-      <version>1.4.12</version>
+      <groupId>com.github.rskupnik</groupId>
+      <artifactId>parrot</artifactId>
+      <version>2.0</version>
     </dependency>
+
+    <!-- HTTP components used to send an HTTP request to post the screenshot -->
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
@@ -37,6 +44,8 @@
       <artifactId>httpmime</artifactId>
       <version>4.5.2</version>
     </dependency>
+
+    <!-- Jackson used to parse the JSON response from the image hosting -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
@@ -53,23 +62,28 @@
       <version>2.7.5</version>
     </dependency>
     <dependency>
-      <groupId>de.btobastian.javacord</groupId>
-      <artifactId>javacord</artifactId>
-      <version>2.0.11</version>
-      <!-- This will use the shaded javacord which contains all required dependencies -->
-      <classifier>shaded</classifier>
+      <groupId>com.github.austinv11</groupId>
+      <artifactId>Discord4j</artifactId>
+      <version>2.3.0</version>
     </dependency>
-    <!-- A SLF4J comaptible logging framework. I would recommend to use logback -->
+
+    <!-- JKeyMaster used to setup a global hotkey -->
     <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.0.13</version>
+      <groupId>com.github.tulskiy</groupId>
+      <artifactId>jkeymaster</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <!-- SLF4j NOP used to disable ugly logger messages -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-nop</artifactId>
+      <version>1.7.21</version>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -103,12 +117,11 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.github.rskupnik.Snapper</mainClass>
+              <mainClass>com.github.rskupnik.Snapcord</mainClass>
             </manifest>
           </archive>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
 
