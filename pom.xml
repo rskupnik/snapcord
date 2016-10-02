@@ -125,4 +125,12 @@
     </plugins>
   </build>
 
+  <distributionManagement>
+    <repository>
+      <id>bintray-rskupnik-maven</id>
+      <name>rskupnik-maven</name>
+      <url>https://api.bintray.com/maven/rskupnik/maven/snapcord/;publish=1</url>
+    </repository>
+  </distributionManagement>
+
 </project>
