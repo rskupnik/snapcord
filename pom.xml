@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.rskupnik</groupId>
-  <artifactId>snapper</artifactId>
+  <artifactId>snapcord</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
-  <name>snapper</name>
+  <name>snapcord</name>
   <url>http://maven.apache.org</url>
 
   <repositories>
@@ -61,10 +61,12 @@
       <artifactId>jackson-annotations</artifactId>
       <version>2.7.5</version>
     </dependency>
+
+    <!-- Discord4j is used to communicate with the Discord API -->
     <dependency>
       <groupId>com.github.austinv11</groupId>
       <artifactId>Discord4j</artifactId>
-      <version>2.3.0</version>
+      <version>2.6.1</version>
     </dependency>
 
     <!-- JKeyMaster used to setup a global hotkey -->
@@ -74,12 +76,17 @@
       <version>1.2</version>
     </dependency>
 
-    <!-- SLF4j NOP used to disable ugly logger messages -->
+    <!-- SLF4j - use NOP to disable logging or use simple to see the messages -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-nop</artifactId>
       <version>1.7.21</version>
     </dependency>
+    <!-- <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.21</version>
+    </dependency> -->
   </dependencies>
 
   <build>

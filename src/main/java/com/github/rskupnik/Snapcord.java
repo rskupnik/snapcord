@@ -12,13 +12,13 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import sx.blah.discord.api.ClientBuilder;
-import sx.blah.discord.api.DiscordException;
 import sx.blah.discord.api.IDiscordClient;
-import sx.blah.discord.api.MissingPermissionsException;
-import sx.blah.discord.handle.EventSubscriber;
+import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
 import sx.blah.discord.handle.obj.IChannel;
-import sx.blah.discord.util.HTTP429Exception;
+import sx.blah.discord.util.DiscordException;
+import sx.blah.discord.util.MissingPermissionsException;
+import sx.blah.discord.util.RateLimitException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -68,6 +68,8 @@ public class Snapcord {
         System.out.println("                  |_|                        ");
         System.out.println("by Myzreal");
         System.out.println("");
+        System.out.println("To exit, press Ctrl+C");
+        System.out.println();
     }
 
     private void loadProperties() {
@@ -103,7 +105,7 @@ public class Snapcord {
 
             try {
                 channel.get().sendMessage(response.get().getImage());
-            } catch (MissingPermissionsException | HTTP429Exception | DiscordException e) {
+            } catch (MissingPermissionsException | RateLimitException | DiscordException e) {
                 e.printStackTrace();
             }
         });
@@ -129,7 +131,7 @@ public class Snapcord {
             if (StringUtils.isBlank(channelName))
                 return Optional.empty();
 
-            for (IChannel channel : api.getChannels(true)) {
+            for (IChannel channel : api.getChannels(false)) {
                 if (channel.getName().equals(channelName))
                     return Optional.of(channel);
             }
@@ -138,10 +140,6 @@ public class Snapcord {
         return Optional.empty();
     }
 
-    /**
-     * Retrieving this event indicates we are connected to the Discord API
-     * and ready to go. Nothing should be done before this event is received.
-     */
     @EventSubscriber
     public void onReadyEvent(ReadyEvent event) {
         System.out.println("Ready! - use ["+hotkey+"] to take a screenshot and post it to your discord channel");
